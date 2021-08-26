@@ -1,0 +1,22 @@
+﻿<Window x:Class="ScreenBarScanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScreenBarScanner"
+        mc:Ignorable="d"
+        Title="ScreenBarScanner" Height="140" Width="195">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button Content="Capture" Margin="10,5,10,10" Click="Capture_Btn_Click" Grid.Row="1" Grid.Column="0" x:Name="Capture_Btn" />
+        <CheckBox Content="Invert " HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="0" Checked="Invert_CheckBox_Checked" Grid.Column="0" x:Name="Invert_CheckBox"/>
+
+    </Grid>
+</Window>
