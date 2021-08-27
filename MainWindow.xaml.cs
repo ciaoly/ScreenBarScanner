@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace ScreenBarScanner
 {
@@ -33,7 +20,7 @@ namespace ScreenBarScanner
             set
             {
                 this._invert = value;
-                if(this.captureWindow != null)
+                if (this.captureWindow != null)
                 {
                     this.captureWindow.Invert = value;
                 }
@@ -42,7 +29,7 @@ namespace ScreenBarScanner
 
         private void Capture_Btn_Click(object sender, RoutedEventArgs e)
         {
-            if(this.captureWindow == null)
+            if (this.captureWindow == null)
             {
                 this.captureWindow = new CaptureWindow();
             }
@@ -58,6 +45,21 @@ namespace ScreenBarScanner
         private void Invert_CheckBox_UnChecked(object sender, RoutedEventArgs e)
         {
             this.Invert = false;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.captureWindow != null)
+            {
+                try
+                {
+                    this.captureWindow.Close();
+                }
+                catch
+                {
+
+                }
+            }
         }
     }
 }

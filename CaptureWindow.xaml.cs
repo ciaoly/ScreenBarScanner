@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -38,7 +37,7 @@ namespace ScreenBarScanner
         public double dpiRatio
         {
             get => this._dpiRatio;
-            set{}
+            set { }
         }
 
         //public double screenH
@@ -67,19 +66,19 @@ namespace ScreenBarScanner
 
         private void End()
         {
-                if(isMouseDown)
-                {
-                    isMouseDown = false;
-                }
-                    x = 0.0;
-                    y = 0.0;
-                    CaptureCanvas.Children.Clear();
-                    this.Hide();
+            if (isMouseDown)
+            {
+                isMouseDown = false;
+            }
+            x = 0.0;
+            y = 0.0;
+            CaptureCanvas.Children.Clear();
+            this.Hide();
         }
 
         private void CaptureWindow_MouseMove(object sender, MouseEventArgs e)
         {
-            if(e.RightButton == MouseButtonState.Pressed)
+            if (e.RightButton == MouseButtonState.Pressed)
             {
                 CaptureWindow_MouseRightButtonDown(sender, null);
                 return;
@@ -128,10 +127,11 @@ namespace ScreenBarScanner
                     {
                         bitmap = CaptureScreenWithCurrentDpi(e.GetPosition(null).X, e.GetPosition(null).Y, width, height);
                     }
-                    if(bitmap != null)
+                    if (bitmap != null)
                     {
                         this.ShowText(this.BarScan(bitmap));
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("Error.");
                     }
@@ -146,7 +146,8 @@ namespace ScreenBarScanner
             {
                 Console.WriteLine("Decode failed.");
                 MessageBox.Show("Failed");
-            } else
+            }
+            else
             {
                 if (this.textDialog == null || this.textDialog.IsClosed)
                 {
@@ -159,6 +160,10 @@ namespace ScreenBarScanner
                 this.textDialog.text = result.Text;
                 this.textDialog.Title = Enum.GetName(typeof(BarcodeFormat), result.BarcodeFormat);
                 this.textDialog.Show();
+                if (!this.textDialog.IsActive)
+                {
+                    this.textDialog.Activate();
+                }
                 Console.WriteLine("BarcodeFormat: {0}", result.BarcodeFormat);
                 Console.WriteLine("Result: {0}", result.Text);
             }
@@ -175,7 +180,7 @@ namespace ScreenBarScanner
             using (System.Drawing.Graphics graphics = Graphics.FromImage(bitmap))
             {
                 graphics.CopyFromScreen(ix, iy, 0, 0, new System.Drawing.Size(iw, ih));
-                if(this.Invert)
+                if (this.Invert)
                 {
                     bitmap = this.BmpInvert(bitmap, iw, ih);
                 }
@@ -227,7 +232,7 @@ namespace ScreenBarScanner
             //var newhint = new KeyValuePair<DecodeHintType, object>(DecodeHintType.ALLOWED_EAN_EXTENSIONS, new Object());
             //reader.Options.Hints.Add(newhint);
 
-            return  barcodeReader.Decode(source);
+            return barcodeReader.Decode(source);
         }
 
         /// <summary>
@@ -256,6 +261,14 @@ namespace ScreenBarScanner
             }
 
             return bm;//返回经过反色处理后的图片
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!this.textDialog.IsClosed)
+            {
+                this.textDialog.Close();
+            }
         }
     }
 }
