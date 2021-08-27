@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScreenBarScanner"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="ScreenBarScanner" Height="140" Width="195">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,8 +16,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Content="Capture" Margin="10,5,10,10" Click="Capture_Btn_Click" Grid.Row="1" Grid.Column="0" x:Name="Capture_Btn" />
-        <CheckBox Content="Invert " HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="0" Checked="Invert_CheckBox_Checked" Grid.Column="0" x:Name="Invert_CheckBox"/>
+        <Button Content="&#xE637; Capture" Margin="10,5,10,10" Click="Capture_Btn_Click" FontFamily="pack://application:,,,/Resources/#iconfont" Grid.Row="1" Grid.Column="0" x:Name="Capture_Btn" FontSize="20" />
+        <CheckBox Content="Invert " HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="0" Unchecked="Invert_CheckBox_UnChecked" Checked="Invert_CheckBox_Checked" Grid.Column="0" x:Name="Invert_CheckBox"/>
 
     </Grid>
 </Window>
